@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import OffTable from "./Table";
+import OffTable from "./components/OffTable";
 import makeData from "./makeData";
 
 import "./styles.css";
@@ -29,8 +29,8 @@ export default function App() {
 
   const fetchMoreData = () => {
     setTimeout(() => {
-      setItems(items.concat(makeData(2)));
-    }, 1500);
+      setItems(items.concat(makeData(4)));
+    }, 1000);
   };
 
   return (
