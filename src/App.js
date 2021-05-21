@@ -1,28 +1,41 @@
-import logo from "./logo.svg";
-import Wrapper from "./components/Wrapper";
-import "./App.css";
+import React, { useState } from "react";
+import OffTable from "./Table";
+import makeData from "./makeData";
 
-function App() {
+import "./styles.css";
+
+export default function App() {
+  const [items, setItems] = useState(makeData(40));
+
+  const col = [
+    {
+      title: "firstName",
+      dataIndex: "firstName",
+      key: "name",
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
+    },
+    {
+      title: "progress",
+      dataIndex: "progress",
+      key: "address",
+    },
+  ];
+
+  const data = React.useMemo(() => items, [items]);
+
+  const fetchMoreData = () => {
+    setTimeout(() => {
+      setItems(items.concat(makeData(2)));
+    }, 1500);
+  };
+
   return (
-    <Wrapper title="A new Title In Header" anotherTitle="Another Title">
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </Wrapper>
+    <>
+      <OffTable testData={data} column={col} update={fetchMoreData} />
+    </>
   );
 }
-
-export default App;
