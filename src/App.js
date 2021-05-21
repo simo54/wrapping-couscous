@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import OffTable from "./components/OffTable";
 import makeData from "./makeData";
 
-import "./styles.css";
-
 export default function App() {
   const [items, setItems] = useState(makeData(40));
 

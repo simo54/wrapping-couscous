@@ -1,12 +1,31 @@
-// Wrapper
 import React from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function Wrapper({ title, anotherTitle, children }) {
+/** DOCS { https://github.com/ankeetmaini/react-infinite-scroll-component#readme } */
+
+function InfiniteScrollWrapper({
+  isInfiniteScrollOn,
+  lengthData,
+  functionNext,
+  children,
+}) {
+  if (!isInfiniteScrollOn) return <>{children}</>;
+
   return (
-    <div className="yepthatsme">
-      <h2>{title}</h2>
-      {children} {/** Our children will stay within the wrapper */}
-      <h2>{anotherTitle}</h2>
-    </div>
+    <InfiniteScroll
+      dataLength={lengthData} //This is important field to render the next data
+      next={functionNext}
+      hasMore={true}
+      loader={<h4>Loading...</h4>}
+      endMessage={
+        <p style={{ textAlign: "center" }}>
+          <b>Yay! You have seen it all</b>
+        </p>
+      }
+    >
+      {children} {/** !!! DO NOT TOUCH !!! => It wraps the table */}
+    </InfiniteScroll>
   );
 }
+
+export default InfiniteScrollWrapper;
